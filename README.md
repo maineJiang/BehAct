@@ -16,6 +16,40 @@ meant to complement the [paper](https://peract.github.io/) by providing concrete
 
 <img src="https://peract.github.io/media/figures/sim_task.jpg" alt="drawing"/>
 
+## Installation
+
+**install the pytorch according to your cuda version**
+
+pip install torch==1.9.0+cu102 torchvision==0.10.0+cu102 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
+
+<code>
+pip install requirements.txt
+</code>
+
+## Data Preparation
+
+To run the project, you can harvest the data from here
+
+Then set the data path(DATA_FOLDER) and ckpts saving path(SAVE_DIR) in your config
+
+## Run
+
+**Train the model**
+
+ws is the gpu's number
+
+<code>
+python train.py --config put_in.yaml --ws 1
+</code>
+
+**Evaluate the model on valid dataset**
+
+<code>
+python valid.py --config put_in.yaml --ws 1
+</code>
+
+##
+
 ## Credit
 This notebook heavily builds on data-loading and pre-preprocessing code from [`ARM`](https://github.com/stepjam/ARM), [`YARR`](https://github.com/stepjam/YARR), [`PyRep`](https://github.com/stepjam/PyRep), [`RLBench`](https://github.com/stepjam/RLBench) by [Stephen James et al.](https://stepjam.github.io/) The [PerceiverIO](https://arxiv.org/abs/2107.14795) code is adapted from [`perceiver-pytorch`](https://github.com/lucidrains/perceiver-pytorch) by [Phil Wang (lucidrains)](https://github.com/lucidrains). The optimizer is based on [this LAMB implementation](https://github.com/cybertronai/pytorch-lamb). See the corresponding licenses below.
 

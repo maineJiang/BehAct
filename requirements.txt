@@ -1,0 +1,13 @@
+scipy
+ftfy
+regex
+tqdm
+torch
+git+https://github.com/openai/CLIP.git
+einops
+pyrender==0.1.45
+trimesh==3.9.34
+pycollada==0.6
+opencv==4.7.0.72
+natsort
+pytorch3d
