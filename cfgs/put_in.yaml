@@ -35,8 +35,9 @@ DEMO_AUGMENTATION_EVERY_N: 10  # sample n-th frame in demo
 ROTATION_RESOLUTION: 5  # degree increments per axis
 
 # Training
+LR: 0.00001
 LOG_FREQ: 100
-TRAINING_ITERATIONS: 40000
+TRAINING_ITERATIONS: 80000
 SAVE_FREQ: 5000  # save model!!
 MINIMUM_SAVE_ITER: 15000
 SAVE_DIR: /data1/peract/ckpts

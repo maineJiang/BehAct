@@ -155,7 +155,7 @@ def train(rank, ws, cfg):
         voxel_feature_size=3,
         num_rotation_classes=72,
         rotation_resolution=5,
-        lr=0.0001,
+        lr=cfg['LR'],
         image_resolution=[cfg['IMAGE_SIZE'], cfg['IMAGE_SIZE']],
         lambda_weight_l2=0.000001,
         transform_augmentation=cfg['TRANSFORM_AUGMENTATION'],
