@@ -60,11 +60,16 @@ def train(rank, ws, cfg):
         idxs = [i for i in range(total_num_demo)]
         random.shuffle(idxs)
         single_gpu_num_demo = total_num_demo // word_size
-        start_index = single_gpu_num_demo * rank
-        if rank == word_size - 1:
-            split_idxs = idxs[start_index:]
+        remain_gpu_num_demo = total_num_demo % word_size
+        
+        if rank < remain_gpu_num_demo:
+          # distribute one more demo
+          start_index = (single_gpu_num_demo + 1) * rank 
+          split_idxs = idxs[start_index:start_index + single_gpu_num_demo + 1]
         else:
-            split_idxs = idxs[start_index:start_index + single_gpu_num_demo]
+          start_index = (single_gpu_num_demo) * rank + remain_gpu_num_demo
+          split_idxs = idxs[start_index:start_index + single_gpu_num_demo]
+        print('rank',rank,'split_idxs',start_index)
 
         return split_idxs
 
