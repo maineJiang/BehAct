@@ -26,7 +26,7 @@ def train(rank, ws, cfg):
     # Set seeds at the beginning of your script
     set_seeds(42)  # very important, in this way you can ensure all the running is consistent and easy to debug
 
-    dist.init_process_group('nccl', init_method='tcp://127.0.0.1:28765',
+    dist.init_process_group('nccl', init_method='tcp://127.0.0.1:28766',
                             rank=rank, world_size=ws)
     rank = dist.get_rank()
     print(f"rank = {rank} is initialized")
