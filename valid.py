@@ -10,7 +10,7 @@ import torch.distributed as dist
 import torch.multiprocessing as mp
 import yaml
 
-from myyarr.replay_buffer.wrappers.pytorch_replay_buffer import PyTorchReplayBuffer
+from yarr.replay_buffer.wrappers.pytorch_replay_buffer import PyTorchReplayBuffer
 from train.dataset import create_replay, fill_replay
 from train.peractor import PerceiverIO, PerceiverActorAgent
 def set_seeds(seed):
