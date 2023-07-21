@@ -127,7 +127,9 @@ def _keypoint_discovery(demo: Demo,
 def _all_keypoint(demo: Demo,
                   stopping_delta=0.1) -> List[int]:
     l = len(demo)
-    return list(range(l))
+    episode_keypoints = list(range(l))
+    print('Found %d keypoints.' % len(episode_keypoints), episode_keypoints)
+    return episode_keypoints
 
 
 # discretize translation, rotation, gripper open, and ignore collision actions
@@ -188,9 +190,10 @@ def _add_keypoints_to_replay(
         voxel_sizes: List[int],
         rotation_resolution: int,
         crop_augmentation: bool,
-        description: str = '',
+        description: str = '', # or list
         clip_model=None,
         device='cpu'):
+    flag_bhvs = type(description) == list
     prev_action = None
     obs = inital_obs
     for k, keypoint in enumerate(episode_keypoints):
@@ -204,8 +207,13 @@ def _add_keypoints_to_replay(
         terminal = (k == len(episode_keypoints) - 1)
         reward = float(terminal) * 1.0 if terminal else 0
 
-        obs_dict = extract_obs(obs, cameras, t=k, prev_action=prev_action)
-        tokens = clip.tokenize([description]).numpy()
+        if flag_bhvs:
+          desc = description[keypoint] 
+          obs_dict = extract_obs(obs, cameras, t=0, prev_action=prev_action) #ignore timestamp
+        else:
+          desc = description
+          obs_dict = extract_obs(obs, cameras, t=k, prev_action=prev_action)
+        tokens = clip.tokenize([desc]).numpy()
         token_tensor = torch.from_numpy(tokens).to(device)
         lang_feats, lang_embs = _clip_encode_text(clip_model, token_tensor)
         obs_dict['lang_goal_embs'] = lang_embs[0].float().detach().cpu().numpy()
@@ -217,7 +225,7 @@ def _add_keypoints_to_replay(
             'trans_action_indicies': trans_indicies,
             'rot_grip_action_indicies': rot_grip_indicies,
             'gripper_pose': obs_tp1.gripper_pose,
-            'lang_goal': np.array([description], dtype=object),
+            'lang_goal': np.array([desc], dtype=object),
         }
 
         others.update(final_obs)
@@ -228,7 +236,10 @@ def _add_keypoints_to_replay(
         obs = obs_tp1
 
     # final step
-    obs_dict_tp1 = extract_obs(obs_tp1, cameras, t=k + 1, prev_action=prev_action)
+    if flag_bhvs:
+      obs_dict_tp1 = extract_obs(obs_tp1, cameras, t=0, prev_action=prev_action) #ignore timestamp
+    else:
+      obs_dict_tp1 = extract_obs(obs_tp1, cameras, t=k + 1, prev_action=prev_action)
     obs_dict_tp1['lang_goal_embs'] = lang_embs[0].float().detach().cpu().numpy()
 
     obs_dict_tp1.pop('wrist_world_to_cam', None)
@@ -261,10 +272,12 @@ def fill_replay(replay: ReplayBuffer,
         varation_descs_pkl_file = os.path.join(data_path, EPISODE_FOLDER % d_idx, VARIATION_DESCRIPTIONS_PKL)
         with open(varation_descs_pkl_file, 'rb') as f:
             descs = pickle.load(f)
-
+        assert len(descs) == 1 or len(descs) == len(demo)
+        flag_bhvs = len(descs) == len(demo)
+        
         # extract keypoints
         episode_keypoints = _all_keypoint(demo)  # all is keypoint
-
+        
         for i in range(len(demo) - 1):
             if not demo_augmentation and i > 0:
                 break
@@ -272,7 +285,10 @@ def fill_replay(replay: ReplayBuffer,
                 continue
 
             obs = demo[i]
-            desc = descs[0]
+            if flag_bhvs:
+              desc = descs
+            else:
+              desc = descs[0]
             # if our starting point is past one of the keypoints, then remove it
             while len(episode_keypoints) > 0 and i >= episode_keypoints[0]:
                 episode_keypoints = episode_keypoints[1:]

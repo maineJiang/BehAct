@@ -189,7 +189,7 @@ def train(rank, ws, cfg):
 
     loss_sum, last_log_iteration = 0, -1
     start_time = time.time()
-    for iteration in range(start_iter, cfg['TRAINING_ITERATIONS']):
+    for iteration in range(start_iter + 1, cfg['TRAINING_ITERATIONS'] + 1):
 
         batch = next(train_data_iter)
         # print('rank {} batch {}'.format(rank, batch['trans_action_indicies']))
@@ -208,7 +208,7 @@ def train(rank, ws, cfg):
                 loss_sum, last_log_iteration = 0, iteration
 
             if iteration % cfg['SAVE_FREQ'] == 0 and iteration >= cfg['MINIMUM_SAVE_ITER'] or iteration == cfg[
-                'TRAINING_ITERATIONS'] - 1:
+                'TRAINING_ITERATIONS']:
                 weight_dir = os.path.join(save_dir, str(iteration))
                 os.makedirs(weight_dir, exist_ok=True)
                 peract_agent.save_weights(weight_dir)
