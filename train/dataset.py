@@ -208,7 +208,7 @@ def _add_keypoints_to_replay(
         reward = float(terminal) * 1.0 if terminal else 0
 
         if flag_bhvs:
-          desc = description[max(0, keypoints-1)] 
+          desc = description[max(0, keypoint-1)] 
           obs_dict = extract_obs(obs, cameras, t=0, prev_action=prev_action) #ignore timestamp
         else:
           desc = description
