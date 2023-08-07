@@ -48,6 +48,13 @@ you need apply a openai-api-key from the [openai](https://openai.com/)
 
 the prompt can be found in gpt/scene_prompt.txt
 according to your tasks, you need to manually design them.
+
+**Real-World Data Collection**
+because the data Preparation depends on your software and hardware, we just show our code for reference. You need to modify to adapt yourself devices.
+
+data_collection for Peract     data_collection.py 
+data collection for behaviour Actor   gpt_data_collection.py 
+merge all tasks into a single task    task_aggregate.py 
 ##
 
 ## Credit
