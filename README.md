@@ -1,26 +1,17 @@
-# **PerAct** 
-
-<p align="left">
-    </a>
-    <a href="https://colab.research.google.com/drive/1HAqemP4cE81SQ6QO1-N85j5bF4C0qLs0?usp=sharing" target="_blank">
-        <img src="https://img.shields.io/badge/colab-minimal">
-    </a>
-</p>
+# **BehAct** 
 
 ## Annotated Tutorial 
 
 **Important: Before starting, change the runtime to GPU.**
 
-This notebook is an annotated tutorial on training [Perceiver-Actor (PerAct)](https://peract.github.io/) from scratch. We will look at training a single-task agent on the `open_drawer` task.  The tutorial will start from loading calibrated RGB-D images, and end with visualizing *action detections* in voxelized observations. Overall, this guide is 
+This repo is an tutorial on training BehAct from scratch. We will look at training a Multi-task agent on the 11 tasks. Overall, this guide is 
 meant to complement the [paper](https://peract.github.io/) by providing concrete implementation details.  
 
-<img src="https://peract.github.io/media/figures/sim_task.jpg" alt="drawing"/>
+<!-- <img src="https://peract.github.io/media/figures/sim_task.jpg" alt="drawing"/> -->
 
 ## Installation
 
 **install the pytorch according to your cuda version**
-
-pip install torch==1.9.0+cu102 torchvision==0.10.0+cu102 torchaudio==0.9.0 -f https://download.pytorch.org/whl/torch_stable.html
 
 <code>
 pip install requirements.txt
@@ -37,13 +28,11 @@ Then set the data path(DATA_FOLDER) and ckpts saving path(SAVE_DIR) in your conf
 **Train the model**
 
 ws is the gpu's number
-
 <code>
 python train.py --config put_in.yaml --ws 1
 </code>
 
 **Evaluate the model on valid dataset**
-
 <code>
 python valid.py --config put_in.yaml --ws 1
 </code>
