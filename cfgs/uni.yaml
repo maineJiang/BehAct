@@ -1,0 +1,47 @@
+TASK: uni
+SAVE_SUFFIX: _721_se3
+SCENE_BOUNDS:  # [x_min, y_min, z_min, x_max, y_max, z_max] - the metric volume to be voxelized
+  - -0.385
+  - -0.711
+  - -0.211
+  - 0.314
+  - -0.179
+  - 0.09
+NUM_DEMOS: 276  # total number of training demonstrations to use while training PerAct
+NUM_TEST: 44  # episodes to evaluate on
+LOW_DIM_SIZE: 4  # {left_finger_joint, right_finger_joint, gripper_open, timestep}
+
+
+# Data
+DATA_FOLDER: /data1/peract
+TRANSFORM_AUGMENTATION: true
+TRANSFORM_AUGMENTATION_XYZ:
+  - 0.1
+  - 0.1
+  - 0.0
+TRANSFORM_AUGMENTATION_RPY:
+  - 0.0
+  - 0.0
+  - 45.0
+# Model
+VOXEL_SIZES:
+  - 100  # 100x100x100 voxels
+NUM_LATENTS: 512  # PerceiverIO latents
+BATCH_SIZE: 1
+CAMERAS:
+  - 'front'
+IMAGE_SIZE: 128
+DEMO_AUGMENTATION_EVERY_N: 10  # sample n-th frame in demo
+ROTATION_RESOLUTION: 5  # degree increments per axis
+
+# Training
+LR: 0.0001
+LOG_FREQ: 100
+TRAINING_ITERATIONS: 120000
+SAVE_FREQ: 10000  # save model!!
+MINIMUM_SAVE_ITER: 25000
+SAVE_DIR: /data1/peract/ckpts
+
+# TESTING
+WEIGHT: 120000
+TESTING_ITERATIONS: 50
