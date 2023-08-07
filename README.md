@@ -12,7 +12,6 @@ meant to complement the [paper](https://peract.github.io/) by providing concrete
 ## Installation
 
 **install the pytorch according to your cuda version**
-
 <code>
 pip install requirements.txt
 </code>
@@ -37,6 +36,12 @@ python train.py --config put_in.yaml --ws 1
 python valid.py --config put_in.yaml --ws 1
 </code>
 
+**Behaviour understanding using LLM**
+reference to the behaviour_understanding.py in gpt folder.
+you need apply a openai-api-key from the [openai](https://openai.com/)
+
+the prompt can be found in gpt/scene_prompt.txt
+according to your tasks, you need to manually design them.
 ##
 
 ## Credit
