@@ -1,0 +1,92 @@
+I want you to help me divide the commands for a UR robot into several behaviours. Here is the scene: there is a table in front of the robot. The robot has a arm and the tool on the end of the arm is a sucker. There are several things may on the table, including some daily stuff and some toy blocks. You need to divide the command into less than 10 behaviours. Each behaviour must exist in the list I gave to you. you should give back the behaviours in a python style list.
+
+Here is the behaviours list, the behaviour you use must belong to this list:
+0: 'get poker',
+1: 'get nuts',
+2: 'get oil',
+3: 'get cream',
+4: 'get bowl',
+5: 'get cover',
+6: 'get yellow block',
+7: 'get green block',
+8: 'get tool',
+9: 'pull up',
+10: 'drop box',
+11: 'drop bowl',
+12: 'drop left',
+13: 'drop right',
+14: 'drop down',
+15: 'drop pink block',
+16: 'drop yellow block',
+17: 'drop cream',
+18: 'drop oil',
+19: 'drop cream',
+20: 'drop cover on cream',
+21: 'move left',
+22: 'move right',
+23: 'move back',
+24: 'move blue block',
+25: 'move pink block',
+26: 'move poker',
+27: 'move oil',
+28: 'above pink block',
+29: 'above yellow block',
+30: 'above oil',
+31: 'above cream',
+32: 'above button',
+33: 'behind blue block',
+34: 'right of blue block',
+35: 'rotate',
+36: 'press',
+37: 'align',
+38: 'push left'
+39: 'push right'
+
+I will explain the basic meaning of behaviours for you. "get" means the robot use the sucker to suck the item without lifting it. Pull up is most common behaviour which used to lift the sucked item to some height to avoid collision. drop behaviour indicates realeasing the object on something. move behaviour is for moving the robot arm to some location holding the object(without changing the state of suction). above, behind, right means move to some relative location of the objects. rotate is for a certain degree rotation of robot arm.
+Here is some example commands divided by me you can refer to(command follow by sub-behaviours every two lines):
+put the poker in the box
+['get poker', 'pull up', 'drop box']
+put the poker in the bowl
+['get poker', 'pull up', 'drop bowl']
+put the nuts in the box
+['get nuts', 'pull up', 'drop box']
+put the nuts in the bowl
+['get nuts', 'pull up', 'drop bowl']
+move the yellow block to the left
+['get yellow block', 'pull up', 'move left', 'drop down']
+move the yellow block to the right
+['get yellow block', 'pull up', 'move right', 'drop down']
+stack the green block on the pink block
+['get green block', 'pull up', 'above pink block', 'drop pink block']
+stack the green block on the yellow block
+['get green block', 'pull up', 'above yellow block', 'drop yellow block']
+cover the oil
+['get bowl', 'pull up', 'above oil', 'drop oil']
+cover the cream
+['get bowl', 'pull up', 'above cream', 'drop cream']
+hit the blue block
+['get tool', 'move blue block']
+hit the pink block
+['get tool', 'move pink block']
+rotate the oil
+['get oil', 'pull up', 'rotate', 'drop down']
+rotate the poker
+['get poker', 'pull up', 'rotate', 'drop down']
+bring the cream to the poker
+['get cream', 'move poker']
+bring the nuts to the oil
+['get oil', 'move oil']
+press the button
+['above button', 'press']
+push the blue block to the left
+['behind blue block', 'align', 'pull up', 'right of blue block', 'push left']
+push the blue block to the right
+['behind blue block', 'align', 'pull up', 'right of blue block', 'push right']
+close the cream
+['get cover', 'pull up', 'drop cover on cream', 'rotate']
+uncover the bowl and pick up the oil
+['get bowl', 'pull up', 'move back', 'drop down', 'pull up', 'get oil', 'pull up']
+uncover the bowl and pick up the cream
+['get bowl', 'pull up', 'move back', 'drop down', 'pull up', 'get cream', 'pull up']
+
+Using above information to help me break down the command into behaviours. Just return the python list. Do not return any other information. Keep breaking down any command I give you until I give other instruction.
