@@ -2,10 +2,8 @@
 
 ## Annotated Tutorial 
 
-**Important: Before starting, change the runtime to GPU.**
-
 This repo is an tutorial on training BehAct from scratch. We will look at training a Multi-task agent on the 11 tasks. Overall, this guide is 
-meant to complement the [paper](https://peract.github.io/) by providing concrete implementation details.  
+meant to complement the [paper](https://behact.github.io/) by providing concrete implementation details.  
 
 <!-- <img src="https://peract.github.io/media/figures/sim_task.jpg" alt="drawing"/> -->
 
@@ -28,13 +26,16 @@ Then set the data path(DATA_FOLDER) and ckpts saving path(SAVE_DIR) in your conf
 
 ws is the gpu's number
 <code>
-python train.py --config put_in.yaml --ws 1
+python train.py --config gpt_uni.yaml --ws 8
 </code>
 
 **Evaluate the model on valid dataset**
 <code>
-python valid.py --config put_in.yaml --ws 1
+python valid.py --config gpt_uni.yaml --ws 1
 </code>
+
+If you want to reproduce the result of PerAct, you can use the uni.yaml as you config and keep other settings unchange.
+If you want to train the model on a single task like put_in task, also, you can use the put_in.yaml correspondingly.
 
 **Behaviour understanding using LLM**
 reference to the behaviour_understanding.py in gpt folder.
