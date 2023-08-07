@@ -52,9 +52,11 @@ according to your tasks, you need to manually design them.
 **Real-World Data Collection**
 because the data Preparation depends on your software and hardware, we just show our code for reference. You need to modify to adapt yourself devices.
 
-data_collection for Peract     data_collection.py 
-data collection for behaviour Actor   gpt_data_collection.py 
-merge all tasks into a single task    task_aggregate.py 
+1. **Data collection for Task Actor(using high level commands)**  data_collection.py   
+2. **Data collection for behaviour Actor**   gpt_data_collection.py  
+3. **merge all tasks into a single task**   task_aggregate.py 
+
+
 ##
 
 ## Credit
