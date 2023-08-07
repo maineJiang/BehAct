@@ -127,7 +127,7 @@ def _keypoint_discovery(demo: Demo,
 def _all_keypoint(demo: Demo,
                   stopping_delta=0.1) -> List[int]:
     l = len(demo)
-    episode_keypoints = list(range(l))
+    episode_keypoints = list(range(1,l))
     print('Found %d keypoints.' % len(episode_keypoints), episode_keypoints)
     return episode_keypoints
 

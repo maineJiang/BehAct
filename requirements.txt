@@ -13,3 +13,5 @@ natsort
 pytorch3d
 openai
 langchain
+open3d
+matplotlib
