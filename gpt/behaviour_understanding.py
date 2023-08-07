@@ -18,7 +18,7 @@ from langchain.schema import (
     SystemMessage
 )
 
-openai.api_key = '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'
+openai.api_key = '' #put your api_key here to control the usage account
 
 # system prompt，用于告诉GPT当前的情景，不了解可以放空，没有影响。
 # system prompt例如：'You are a marketing consultant, please answer the client's questions in profession style.'
