@@ -34,6 +34,11 @@ python train.py --config gpt_uni.yaml --ws 8
 python valid.py --config gpt_uni.yaml --ws 1
 </code>
 
+**Inference the model with a single observation(example)**
+<code>
+python inference.py
+</code>
+
 If you want to reproduce the result of PerAct, you can use the uni.yaml as you config and keep other settings unchange.
 If you want to train the model on a single task like put_in task, also, you can use the put_in.yaml correspondingly.
 
