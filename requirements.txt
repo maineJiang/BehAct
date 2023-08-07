@@ -11,3 +11,5 @@ pycollada==0.6
 opencv==4.7.0.72
 natsort
 pytorch3d
+openai
+langchain
